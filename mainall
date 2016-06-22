@@ -1,0 +1,194 @@
+#include <Servo.h>           //Bibliothek for servos
+#include <Wire.h>            //Bibliothek for showing datas of Temp sensors
+include "nunchuck_funcs.h"
+
+//////////////////////////////////////////////////////////////////////////////////
+//				hycomet telemetry 												//
+//				University of Applied Sciences Augsburg							//
+//				Faculty of Mechanical Engineering and Process Engineering		//
+//				Created:	2016												//
+//				Philipp Freymann												//											
+//				Felix Kampfer													//										
+//				Tim Mehling 													//
+//				Patrick Oppel													//
+//////////////////////////////////////////////////////////////////////////////////
+
+Servo valveservo1;  // create servo 1 object to control a servo
+Servo valveservo2;  // create servo 1 object to control a servo
+// twelve servo objects can be created on most boards
+
+int loop_cnt=0; //variable for showing datas of Temp sensors http://playground.arduino.cc/Deutsch/ShowSerialDataWithLogViewDe
+byte temp1,temp2;
+
+int pos = 0;    // variable to store the servo position
+
+int a;          // working variable für servo control for servos in rocket
+
+int pin1 = 0;   // pins
+int pin2 = 0;   // pins
+int pin3 = 0;   // pins
+int pin4 = 0;   // pins
+int pin5 = 0;   // pins
+int pin6 = 0;   // pins
+int pin7 = 0;   // pins
+int pin8 = 0;   // pins
+int pin9 = 0;   // pins
+int pin10 = 0;  // pins
+int pin11 = 0;  // pins
+int pin12 = 0;  // pins
+int pin13 = 0;  // pins
+int pin14 = 0;  // pins
+int pin15 = 0;  // pins
+int pin16 = 0;  // pins
+int pin17 = 0;  // pins
+int pin18 = 0;  // pins
+int pin19 = 0;  // pins
+int pin20 = 0;  // pins
+
+
+
+void setup() {
+
+  Serial.begin(9600);
+  nunchuck_setpowerpins();
+  nunchuck_init();              // send the initilization handshake
+  
+  pinMode(led,OUTPUT);          // LED for control
+  
+  myservo1.attach(9);           // attaches the servo 1 on pin 9 to the servo object
+  
+	 if (Serial.available()) {
+     pinMode(pin1, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin2, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+     pinMode(pin3, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin4, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+     pinMode(pin5, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin6, OUTPUT);     // sets the pin as output
+     }
+	 	 if (Serial.available()) {
+     pinMode(pin7, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin8, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+     pinMode(pin9, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin10, OUTPUT);    // sets the pin as output
+     }
+	 if (Serial.available()) {
+     pinMode(pin11, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin12, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+     pinMode(pin13, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin14, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+     pinMode(pin15, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin16, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+     pinMode(pin17, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin18, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+     pinMode(pin19, OUTPUT);     // sets the pin as output
+     }
+	 if (Serial.available()) {
+	 pinMode(pin20, OUTPUT);    // sets the pin as output
+     }
+}
+
+void loop() {
+
+// servo control for servos in rocket
+  for (pos = 0; pos <= 180; pos += 1) { // servo 1 goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    valveservo1.write(pos);             // tell servo 1 to go to position in variable 'pos'
+    delay(15);                          // waits 15ms for the servo 1 to reach the position
+  }
+  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+    valveservo1.write(pos);             // tell servo 1 to go to position in variable 'pos'
+    delay(15);                          // waits 15ms for the servo 1 to reach the position
+  }
+  
+  for (pos = 0; pos <= 180; pos += 1) { // servo 1 goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    valveservo2.write(pos);             // tell servo 1 to go to position in variable 'pos'
+    delay(15);                          // waits 15ms for the servo 1 to reach the position
+  }
+  for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+    valveservo2.write(pos);             // tell servo 1 to go to position in variable 'pos'
+    delay(15);                          // waits 15ms for the servo 1 to reach the position
+  }
+  
+// pin control for telemetry activation and deactivation
+	digitalWrite(1,LOW);	    // Schaltet GROUND auf den digitalen Kanal 1
+	digitalWrite(2,HIGH);	    // Schaltet 5V+ auf den digitalen Kanal 2
+	digitalWrite(3,LOW); 		// Schaltet GROUND auf den digitalen Kanal 3
+	digitalWrite(4,HIGH);	    // Schaltet 5V+ auf den digitalen Kanal 4
+	digitalWrite(5,LOW); 		// Schaltet GROUND auf den digitalen Kanal 5
+	digitalWrite(6,HIGH);	    // Schaltet 5V+ auf den digitalen Kanal 6
+	digitalWrite(7,LOW); 		// Schaltet GROUND auf den digitalen Kanal 7
+	digitalWrite(8,HIGH); 		// Schaltet 5V+ auf den digitalen Kanal 8
+	digitalWrite(9,LOW); 		// Schaltet GROUND auf den digitalen Kanal 9
+	digitalWrite(10,HIGH);		// Schaltet 5V+ auf den digitalen Kanal 10
+	digitalWrite(11,LOW);	    // Schaltet GROUND auf den digitalen Kanal 1
+	digitalWrite(12,HIGH);	    // Schaltet 5V+ auf den digitalen Kanal 2
+	digitalWrite(13,LOW); 		// Schaltet GROUND auf den digitalen Kanal 3
+	digitalWrite(14,HIGH);	    // Schaltet 5V+ auf den digitalen Kanal 4
+	digitalWrite(15,LOW); 		// Schaltet GROUND auf den digitalen Kanal 5
+	digitalWrite(16,HIGH);	    // Schaltet 5V+ auf den digitalen Kanal 6
+	digitalWrite(17,LOW); 		// Schaltet GROUND auf den digitalen Kanal 7
+	digitalWrite(18,HIGH); 		// Schaltet 5V+ auf den digitalen Kanal 8
+	digitalWrite(19,LOW); 		// Schaltet GROUND auf den digitalen Kanal 9
+	digitalWrite(20,HIGH);		// Schaltet 5V+ auf den digitalen Kanal 10
+	
+// show logged data from temp sensors
+    if( loop_cnt > 100 ) { // every 100 msecs get new data
+    loop_cnt = 0;
+    nunchuck_get_data();
+    temp1  = nunchuck_accelx(); // data from temp sensor 1
+    temp2  = nunchuck_accely(); // data from temp sensor 2
+	
+
+	Serial.print((byte)temp1,DEC);
+    Serial.print(";"); 
+    Serial.print((byte)temp2,DEC);
+    Serial.print(";");
+	}
+    loop_cnt++;
+    delay(1);
+
+// show logged data from pressure sensor
+    if( loop_cnt > 100 ) { // every 100 msecs get new data
+    loop_cnt = 0;
+    nunchuck_get_data();
+    press1  = nunchuck_accelx(); // data from pressure sensor 1
+	
+	Serial.print((byte)press1,DEC);
+    Serial.print(";"); 
+	}
+    loop_cnt++;
+    delay(1);
+}
