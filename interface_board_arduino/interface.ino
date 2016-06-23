@@ -86,7 +86,7 @@ int16_t read_pressure(int avg) {
             pressure_read = pressure_read + analogRead(3);
             if(i==avg)
             {
-              pressure = ((pressure_read/avg)-93)/9.3;
+              pressure = ((pressure_read/avg)-93)/CAL_PRESSURE;
               pressure_read = 0;  
             }
         }
