@@ -13,8 +13,8 @@
       #define CAL_MULT_2 0.978
       #define CAL_OFFSET -3
 
-      //calibration data for pressure sensor (1bar == 10mV => 1bit == 0,93bar)
-      #define CAL_PRESSURE 0.93
+      //calibration data for pressure sensor (1bar ~ 1mV)
+      #define CAL_PRESSURE 9.3
 
       //servo motor controls
       #define OPEN 1700        //pulse lenght in µs for open valve divided by 64µs to calculate timer value
