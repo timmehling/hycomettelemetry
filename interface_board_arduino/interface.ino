@@ -1,5 +1,6 @@
 #include "config.h"
 #include <Servo.h>
+#include <Wire.h>
 
 //HyCOMET-1 Interface Board
 //Arduino Nano
@@ -30,6 +31,9 @@ void setup() {
 
     Serial.begin(serial_speed);     //start up serial interface
     Serial.setTimeout(TIMEOUT);     //serial timeout
+
+    Wire.begin();                   //start up I2C bus as busmaster
+    
     analogReference(INTERNAL);      //use internal 1.1V reference for ADC 
     read_temp(1,32);                //prime ADC for use after reference change
 
@@ -101,7 +105,15 @@ int16_t read_pressure(int avg) {
 void loop() {
 
   command_line_interface(); 
+  
 
+  if(!N2O_lock&&!digitalRead(8))
+  {
+    digitalWrite(8,HIGH);
+  }else if(N2O_lock&&digitalRead(8))
+  {
+    digitalWrite(8,LOW);
+  }
   
   if(!N2O_lock && !digitalRead(2))  
   {
@@ -109,10 +121,10 @@ void loop() {
     valve1.writeMicroseconds(OPEN);
   }else if(!digitalRead(2)&&!warning&&N2O_lock)
   {
-    Serial.println("\n#######");
+    //Serial.println("\n#######");
     Serial.println("WARNING");
     Serial.println("Fire Line B signal recieved. \nHOWEVER, oxidator valve is still LOCKED");
-    Serial.println("#######\n");
+    //Serial.println("#######\n");
     warning = 1;    
   }else if(digitalRead(2))
   {

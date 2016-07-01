@@ -90,11 +90,13 @@ int self_test(int silent){
     if(setup_error)
     {
       digitalWrite(7,HIGH);
+      digitalWrite(12,LOW); 
       if(!silent)Serial.print("\nself test FAILED with ");
       if(!silent)Serial.print(setup_error, DEC);
       if(!silent)Serial.println(" ERROR(S)!! \n");
     }else{
       digitalWrite(12,HIGH);  
+      digitalWrite(7,LOW);
       if(!silent)Serial.println("\nself test PASSED \n");
     }
     return setup_error;
